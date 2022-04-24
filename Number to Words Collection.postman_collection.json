@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "bbea0020-7178-42a8-aaf8-30ee0610d93f",
+		"name": "Number to Words Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Request Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is a JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains Access Token\", function () {\r",
+									"    pm.response.to.have.jsonBody(\"access\")\r",
+									"    // Update environment variable\r",
+									"    pm.environment.unset(\"access_token\")\r",
+									"    pm.environment.set(\"access_token\", pm.response.json().access)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response contains Refresh Token\", function () {\r",
+									"    pm.response.to.have.jsonBody(\"refresh\")\r",
+									"    // Update environment variable\r",
+									"    pm.environment.unset(\"refresh_token\")\r",
+									"    pm.environment.set(\"refresh_token\", pm.response.json().refresh)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/token",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"token"
+							]
+						},
+						"description": "Get a new access token and refresh token.\n\n**Request:**\n- `username`: `String` specify the user.\n- `password`: `String` specify the password of the user."
+					},
+					"response": [
+						{
+							"name": "Token Request Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"username\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/token",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 24 Apr 2022 14:45:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "483"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY1MDg5NzkwNywiaWF0IjoxNjUwODExNTA3LCJqdGkiOiJjOWU2NzYxN2YwNTk0ZDk1YjM4MDI3NWU2MjhmZDkwOSIsInVzZXJfaWQiOjF9.icvn0GBTirkXhme1t18be7ttKhntFWjSNUv1Rj1Leok\",\n    \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUwODEyNDA3LCJpYXQiOjE2NTA4MTE1MDcsImp0aSI6IjQ0OThlMWQyNzA3MzQ3ZjU5MmZhN2JiZDVlM2M0ZDNhIiwidXNlcl9pZCI6MX0.2cszV-SjohG4tpoX6NfgZBRsI9cH_f_KctsNoaiFMRc\"\n}"
+						},
+						{
+							"name": "Token Request Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"username\",\r\n    \"password\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/token",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"token"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 24 Apr 2022 15:15:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"No active account found with the given credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is a JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains Access Token\", function () {\r",
+									"    pm.response.to.have.jsonBody(\"access\")\r",
+									"    // Update environment variable\r",
+									"    pm.environment.unset(\"access_token\")\r",
+									"    pm.environment.set(\"access_token\", pm.response.json().access)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY1MDg5NTI3OSwiaWF0IjoxNjUwODA4ODc5LCJqdGkiOiJjNGJjNjlkYTc5MTU0MTkxOWIzYWI2OGE0ZjVmOGQzNyIsInVzZXJfaWQiOjF9.4Yapfee8OwIgM_gBjmiiNc-jOD2xmApF4IjtABVPVUY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/token/refresh",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"token",
+								"refresh"
+							]
+						},
+						"description": "Get a new access token without sending the users' credentials.\n\n**Request:**\n- `request`: `String` Specify a valid refresh token."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUwODExNjA1LCJpYXQiOjE2NTA4MTA3MDUsImp0aSI6Ijk2YTFmODVkYjA4NDRjYTU5YTRmYWU4ZDU5ZGQ3YjgwIiwidXNlcl9pZCI6MX0.m6LLD9tl71kL-iZnjePlcFuQPbuU9SXaSBvSNCby7Fk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/token/verify",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"token",
+								"verify"
+							]
+						},
+						"description": "Validate an access token.\n\n**Request:**\n\n- `token`: `String` specify the access token to be validated."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Number to Words",
+			"item": [
+				{
+					"name": "Number to English (GET)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/num_to_english?number=1234.00",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"num_to_english"
+							],
+							"query": [
+								{
+									"key": "number",
+									"value": "1234.00",
+									"description": "Numberic value (integer, float or string) to be translated into English."
+								}
+							]
+						},
+						"description": "Convert a numeric value into the word in English that represent it.\n\n**Request:**\n\n- `number`: `String` Specify a numeric value (Ex: `?number=123.45`)."
+					},
+					"response": []
+				},
+				{
+					"name": "Number to English (POST)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": 123.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/num_to_english",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"num_to_english"
+							]
+						},
+						"description": "Convert a numeric value into the word in English that represent it.\n\n**Request:**\n\n- `number`: `Float|Int|String` Specify a numeric value (Ex: `123`, `123.45` or `\"123\"`)."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
