@@ -40,7 +40,7 @@ class Lexer(models.Model):
         return new_tokens
 
     def _explode_token(self, token: Token) -> list[Token]:
-        tokens = []
+        tokens: list[Token] = []
         token_reversed_value = token.value[::-1]
         for i in range(0, len(token_reversed_value), 3):
             new_token = Token(token_reversed_value[i : i + 3][::-1], TokenType.NUMBER)

@@ -1,5 +1,3 @@
-from typing import Optional
-
 from django.db import models
 
 from .token import Token, TokenType
@@ -14,7 +12,7 @@ class Parser(models.Model):
     Parser model.
     """
 
-    def parse(self, tokens: list[Token]) -> Optional[list[Token]]:
+    def parse(self, tokens: list[Token]) -> list[Token]:
 
         if len(tokens) == 0:
             raise ParseError("Empty tokens")
@@ -23,7 +21,7 @@ class Parser(models.Model):
         else:
             return self._multiple_parsing(tokens)
 
-    def _single_parsing(self, tokens: list[Token]) -> Optional[list[Token]]:
+    def _single_parsing(self, tokens: list[Token]) -> list[Token]:
         if tokens[0].type == TokenType.NUMBER:
             if tokens[0].value != "0" and tokens[0].value.startswith("0"):
                 raise ParseError("Non-zero number starts with zero")
@@ -31,7 +29,7 @@ class Parser(models.Model):
         else:
             raise ParseError("Does not starts with number")
 
-    def _multiple_parsing(self, tokens: list[Token]) -> Optional[list[Token]]:
+    def _multiple_parsing(self, tokens: list[Token]) -> list[Token]:
         comman_found = False
         dot_found = False
         is_first_token = True
