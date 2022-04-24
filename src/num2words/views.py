@@ -30,8 +30,8 @@ def number_to_english(request, *args, **kwargs):
                 {
                     "status": "ok",
                     "num_in_english": num_in_english,
-                    # NOTE: Uncomment the following lines to enrich the response
-                    "formated": number_format(str(number)),
+                    # NOTE: Uncomment the following line to enrich the response
+                    # "formated": number_format(str(number)),
                 },
                 status=200,
             )

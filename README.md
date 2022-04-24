@@ -40,3 +40,7 @@ When the `num_to_english` endpoint is hit, it validates the input and calls the 
 8. Create a root user.
 9. Get an Access Token (fetch `/token` with the username and password of your user).
 10. Fetch the `/num_to_english` as explained in the document link on the first part of this README file. Don't forget to send the `access` token as a bearer token.
+
+## Easter Egg
+
+There is an "easter egg", a hidden feature that can be activated by uncommenting a line of code. The reason why I created the feature is because it appeared a nice to have feature and it was easy to implement with the current design. The reason to hide it is because it is not a requirement of the assessment.
